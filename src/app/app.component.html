@@ -9,10 +9,10 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <app-projection-type-switcher *ngIf="projectService.getCurrentProject()"></app-projection-type-switcher>
+      <app-projection-type-switcher *ngIf="projectService.getCurrentProject() && loanService.hasLoans()"></app-projection-type-switcher>
     </div>
     <div class="col-xs-12 col-md-6">
-
+      <app-result *ngIf="projectService.getCurrentProject() && loanService.hasLoans()"></app-result>
     </div>
   </div>
 </div>

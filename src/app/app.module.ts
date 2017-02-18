@@ -11,11 +11,13 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { LoanListComponent } from './loan-list/loan-list.component';
 import { ProjectionTypeSwitcherComponent } from './projection-type-switcher/projection-type-switcher.component';
 import { ProjectItemComponent } from './project-item/project-item.component'
-import {ProjectService} from "./project.service";
-import {LoanService} from "./loan.service";
+import { ProjectService } from "./project.service";
+import { LoanService } from "./loan.service";
 import { LoanItemComponent } from './loan-item/loan-item.component';
 import { SavingsGoalComponent } from './savings-goal/savings-goal.component';
 import { SavingsProjectionComponent } from './savings-projection/savings-projection.component';
+import { ChartsModule } from "ng2-charts";
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { SavingsProjectionComponent } from './savings-projection/savings-project
     ProjectItemComponent,
     LoanItemComponent,
     SavingsGoalComponent,
-    SavingsProjectionComponent
+    SavingsProjectionComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ChartsModule
   ],
   providers: [ProjectService, LoanService],
   bootstrap: [AppComponent]

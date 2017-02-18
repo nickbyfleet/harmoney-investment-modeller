@@ -20,6 +20,10 @@ export class LoanService {
     return this.loansList;
   }
 
+  hasLoans(): boolean {
+    return this.loansList && this.loansList.length > 0;
+  }
+
   getLoans(projectId: number): Promise<Loan[]> {
     return this.http
       .get(`${baseUrl}/projects/${projectId}/loans`)

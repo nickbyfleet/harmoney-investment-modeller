@@ -18,4 +18,5 @@
 
 <br>
 
-<app-loan-list></app-loan-list>
+<app-loan-list *ngIf="loanService.hasLoans()"></app-loan-list>
+<div class="alert alert-warning" role="alert" *ngIf="!loanService.hasLoans()"><strong>Hello :)</strong> Click above to add a loan to your portfolio.</div>

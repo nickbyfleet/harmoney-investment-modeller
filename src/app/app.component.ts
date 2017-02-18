@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ProjectService} from "./project.service";
+import {LoanService} from "./loan.service";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,6 @@ import {ProjectService} from "./project.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor (public projectService: ProjectService) {  }
+  constructor (public projectService: ProjectService,
+               public loanService: LoanService) {  }
 }
