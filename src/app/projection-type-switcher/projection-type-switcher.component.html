@@ -1,3 +1,23 @@
-<p>
-  projection-type-switcher works!
-</p>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios1" value="goal" [(ngModel)]="showSavings">
+      I want to find out how long it will take to reach a certain amount
+    </label>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios2" value="projection" [(ngModel)]="showSavings">
+      I want to know my balance at some point in the future
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <app-savings-goal *ngIf="showSavings === 'goal'"></app-savings-goal>
+    <app-savings-projection *ngIf="showSavings === 'projection'"></app-savings-projection>
+  </div>
+</div>
+
+

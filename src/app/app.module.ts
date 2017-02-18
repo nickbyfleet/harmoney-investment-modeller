@@ -12,6 +12,10 @@ import { LoanListComponent } from './loan-list/loan-list.component';
 import { ProjectionTypeSwitcherComponent } from './projection-type-switcher/projection-type-switcher.component';
 import { ProjectItemComponent } from './project-item/project-item.component'
 import {ProjectService} from "./project.service";
+import {LoanService} from "./loan.service";
+import { LoanItemComponent } from './loan-item/loan-item.component';
+import { SavingsGoalComponent } from './savings-goal/savings-goal.component';
+import { SavingsProjectionComponent } from './savings-projection/savings-projection.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,17 @@ import {ProjectService} from "./project.service";
     ProjectListComponent,
     LoanListComponent,
     ProjectionTypeSwitcherComponent,
-    ProjectItemComponent
+    ProjectItemComponent,
+    LoanItemComponent,
+    SavingsGoalComponent,
+    SavingsProjectionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [ProjectService],
+  providers: [ProjectService, LoanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

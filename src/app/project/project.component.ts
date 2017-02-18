@@ -29,5 +29,4 @@ export class ProjectComponent implements OnInit {
         this.newProjectName = null;
       });
   }
-
 }

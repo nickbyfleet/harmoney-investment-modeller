@@ -9,10 +9,19 @@ const baseUrl:string = 'http://localhost:3000';
 export class ProjectService {
 
   private projectsList: Array<Project>;
+  private currentProject: Project;
 
   constructor(
     private http:Http
   ) { }
+
+  getCurrentProject(): Project {
+    return this.currentProject;
+  }
+
+  setCurrentProject(project: Project) {
+    this.currentProject = project;
+  }
 
   getProjectsList(): Array<Project> {
     return this.projectsList;
@@ -20,7 +29,7 @@ export class ProjectService {
 
   getProjects(): Promise<Project[]> {
     return this.http
-      .get(`${baseUrl}/projects.json`)
+      .get(`${baseUrl}/projects`)
       .toPromise()
       .then(resp => resp.json())
       .then(projects => {
@@ -41,6 +50,7 @@ export class ProjectService {
       .then(resp => resp.json())
       .then(project => {
         this.projectsList.unshift(project);
+        this.currentProject = project;
         return project;
       });
   }
@@ -52,6 +62,7 @@ export class ProjectService {
       .then(resp => resp.json())
       .then(() => {
         this.projectsList.splice(this.projectsList.map((x) => {return x.id; }).indexOf(id), 1);
+        this.currentProject = null;
       });
   }
 }

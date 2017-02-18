@@ -3,7 +3,11 @@ class LoansController < ApplicationController
 
   # GET /loans
   def index
-    @loans = Loan.all
+    if (params[:project_id])
+      @loans = Project.find(params[:project_id]).loans
+    else
+      @loans = Loan.all
+    end
 
     render json: @loans
   end
@@ -41,7 +45,11 @@ class LoansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_loan
-      @loan = Loan.find(params[:id])
+      if (params[:project_id])
+        @loan = Project.find(params[:project_id]).loans
+      else
+        @loan = Loan.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectionTypeSwitcherComponent implements OnInit {
 
+  showSavings: string = 'goal';
+
   constructor() { }
 
   ngOnInit() {

@@ -9,16 +9,13 @@ import {Project} from "../project";
 })
 export class ProjectListComponent implements OnInit {
 
-  projects: Array<Project>;
-
   constructor(
     public projectService:ProjectService
   ) { }
 
   ngOnInit() {
     this.projectService
-      .getProjects()
-      .then(projects => this.projects = projects);
+      .getProjects();
   }
 
 }
