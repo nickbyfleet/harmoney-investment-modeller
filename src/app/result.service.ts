@@ -21,4 +21,23 @@ export class ResultService {
   showResult(): boolean {
     return this.result != null;
   }
+
+  getMonthLabels(numMonths: number): Array<string> {
+
+    let currentDate = new Date();
+
+    let monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+
+    let labels = new Array();
+    let index = (currentDate.getMonth() - 1) % 11;
+
+    for(let i = 0; i < numMonths; i++) {
+      labels.push(monthNames[index]);
+      index = (index + 1) % 11;
+    }
+
+    return labels;
+  }
+
 }

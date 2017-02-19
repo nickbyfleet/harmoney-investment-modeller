@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoanService} from "../loan.service";
 import {ResultService} from "../result.service";
+import {Result} from "../result";
 
 @Component({
   selector: 'app-result',
@@ -9,19 +10,11 @@ import {ResultService} from "../result.service";
 })
 export class ResultComponent implements OnInit {
 
-  constructor(
-    public loanService: LoanService,
-    public resultService: ResultService
-  ) { }
+  public resultMessage:string;
+  public numMonths: number;
+  public lineChartData:Array<any>;
 
-  ngOnInit() {
-  }
-
-  // lineChart
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
-  ];
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels:Array<any>;
   public lineChartOptions:any = {
     responsive: true
   };
@@ -54,17 +47,63 @@ export class ResultComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-  public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
+  constructor(
+    public loanService: LoanService,
+    public resultService: ResultService
+  ) {
+    this.resultMessage = '';
+    this.numMonths = 0;
+    this.lineChartData = new Array();
+    this.lineChartLabels = new Array();
   }
 
+  ngOnInit() {
+    let result: Result = this.resultService.getResult();
+    let balances: Array<number>;
+    let data:any;
+
+    switch (result.scenarioType) {
+      case 'savings_goal':
+        data = this.loanService.getBalanceTarget(result.monthlyContribution, result.targetAmount);
+        this.numMonths = data.numMonths;
+        balances = data.months;
+        this.resultMessage = `You will reach your goal in ${this.numMonths} months.`;
+        break;
+
+      case 'savings_projection':
+        console.log("Doing a savings projection");
+        data = this.loanService.getBalanceAtMonth(result.monthlyContribution, result.targetDate);
+        this.numMonths = data.numMonths;
+        balances = data.months;
+
+        if (balances.length > 0) {
+          let finalBalance = balances[balances.length - 1];
+          this.resultMessage = `Your balance will be $${finalBalance} in ${this.numMonths} months time.`;
+        }
+        break;
+    }
+
+    console.log(balances);
+
+    this.lineChartLabels = this.resultService.getMonthLabels(this.numMonths);
+
+    this.lineChartData.push({
+      data: balances,
+      label: 'Your Portfolio'
+    });
+
+    let harmoney: any = this.loanService.getBalanceInXMonthsByRate(result.monthlyContribution, 12.99, this.numMonths);
+    this.lineChartData.push({
+      data: harmoney.months,
+      label: 'Harmoney Portfolio'
+    });
+
+    let market: any = this.loanService.getBalanceInXMonthsByRate(result.monthlyContribution, 3.36, this.numMonths);
+    this.lineChartData.push({
+      data: market.months,
+      label: 'Market Portfolio'
+    });
+  }
   // events
   public chartClicked(e:any):void {
     console.log(e);

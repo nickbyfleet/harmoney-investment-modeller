@@ -94,8 +94,9 @@ export class LoanService {
 
   // Get number of months until balance hits target
   getBalanceTarget(monthlyContribution: number, targetBalance: number): Object {
-    let currentBalance = this.getTotalAmount();
+    let currentBalance:number = this.getTotalAmount();
     let rate = this.getWeightedRate();
+    console.log(rate);
 
     if (targetBalance < currentBalance) {
       return {
@@ -105,13 +106,13 @@ export class LoanService {
     }
 
     let numMonths = 0;
-    let months: Array<number>;
+    let months: Array<number> = new Array();
     months.push(currentBalance);
 
     while (currentBalance < targetBalance) {
-      let returns = currentBalance * rate;
+      let returns = currentBalance * (rate / 100);
       currentBalance += returns + monthlyContribution;
-      months.push(currentBalance);
+      months.push(Math.round(currentBalance * 100) / 100);
     }
 
     return {
@@ -120,8 +121,28 @@ export class LoanService {
     };
   }
 
+  // Get number of months until balance hits target
+  getBalanceInXMonthsByRate(monthlyContribution: number, rate: number, numMonths: number): Object {
+    let currentBalance:number = this.getTotalAmount();
+
+    let months: Array<number> = new Array();
+    months.push(currentBalance);
+
+    for (let i = 0; i < numMonths; i++) {
+      let returns = currentBalance * (rate / 100);
+      currentBalance += returns + monthlyContribution;
+      months.push(Math.round(currentBalance * 100) / 100);
+    }
+
+    return {
+      numMonths: numMonths,
+      months: months
+    };
+  }
+
   getBalanceAtMonth(monthlyContribution: number, targetDate: Date): Object {
-    let currentDate = new Date;
+    let currentDate = new Date();
+    targetDate = new Date(targetDate);
     let currentBalance = this.getTotalAmount();
     let rate = this.getWeightedRate();
 
@@ -133,17 +154,18 @@ export class LoanService {
     }
 
     let numMonths = this.monthDiff(currentDate, targetDate);
-    let months: Array<number>;
+    console.log('NumMonths ->', numMonths);
+    let months: Array<number> = new Array();
     months.push(currentBalance);
 
     for (let i = 0; i < numMonths; i++) {
-      let returns = currentBalance * rate;
+      let returns = currentBalance * (rate / 100);
       currentBalance += returns + monthlyContribution;
-      months.push(currentBalance);
+      months.push(Math.round(currentBalance * 100) / 100);
     }
 
     return {
-      balance: currentBalance,
+      numMonths: numMonths,
       months: months
     };
   }
