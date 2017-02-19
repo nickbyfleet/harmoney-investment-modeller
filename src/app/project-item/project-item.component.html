@@ -1,3 +1,6 @@
-<button (click)="destroyProject()">Delete</button>
-<h5>{{project.name}}</h5>
-<button (click)="setCurrentProject()">Load Project</button>
+<h5>
+  <button class="btn btn-danger btn-circle" (click)="destroyProject()"><i class="glyphicon glyphicon-minus"></i></button> &nbsp;&nbsp;&nbsp;
+  {{project.name}}
+  <button class="btn btn-info btn-circle pull-right" (click)="setCurrentProject()"><i class="glyphicon glyphicon-play"></i></button>
+</h5>
+

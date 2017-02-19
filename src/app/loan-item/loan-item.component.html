@@ -1,4 +1,8 @@
-<button (click)="destroyLoan()">Delete</button>
-<h5>{{loan.name}}</h5>
-<h5>{{loan.amount | currency: 'USD':true:'1.2-2'}}</h5>
-<h5>%{{loan.rate}}</h5>
+<h5>
+  <button class="btn btn-danger btn-circle" (click)="destroyLoan()"><i class="glyphicon glyphicon-minus"></i>
+  </button>
+  &nbsp;&nbsp;&nbsp;
+  <strong>{{loan.name}}</strong>
+  {{loan.amount | currency: 'USD':true:'1.2-2'}} @ {{loan.rate}}%
+</h5>
+

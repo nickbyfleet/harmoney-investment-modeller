@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ResultService} from "../result.service";
 
 @Component({
   selector: 'app-projection-type-switcher',
@@ -9,9 +10,13 @@ export class ProjectionTypeSwitcherComponent implements OnInit {
 
   showSavings: string = 'goal';
 
-  constructor() { }
+  constructor(
+    public resultService:ResultService
+  ) { }
 
   ngOnInit() {
   }
+
+
 
 }

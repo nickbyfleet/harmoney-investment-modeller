@@ -18,6 +18,7 @@ import { SavingsGoalComponent } from './savings-goal/savings-goal.component';
 import { SavingsProjectionComponent } from './savings-projection/savings-projection.component';
 import { ChartsModule } from "ng2-charts";
 import { ResultComponent } from './result/result.component';
+import { ResultService } from "./result.service";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { ResultComponent } from './result/result.component';
     HttpModule,
     ChartsModule
   ],
-  providers: [ProjectService, LoanService],
+  providers: [ProjectService, LoanService, ResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

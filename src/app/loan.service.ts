@@ -48,8 +48,14 @@ export class LoanService {
       .toPromise()
       .then(resp => resp.json())
       .then(loan => {
-        this.loansList.unshift(loan);
-        return loan;
+        let newLoan = new Loan(
+          loan.id,
+          loan.name,
+          parseFloat(loan.amount),
+          parseFloat(loan.rate)
+        );
+        this.loansList.unshift(newLoan);
+        return newLoan;
       });
   }
 

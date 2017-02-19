@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ProjectService} from "./project.service";
 import {LoanService} from "./loan.service";
+import {ResultService} from "./result.service";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import {LoanService} from "./loan.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor (public projectService: ProjectService,
-               public loanService: LoanService) {  }
+  constructor(public projectService: ProjectService,
+              public loanService: LoanService,
+              public resultService: ResultService) {
+  }
 }

@@ -1,4 +1,10 @@
 <div class="list-group">
-  <app-loan-item class="list-group-item justify-content-between" *ngFor="let loan of loanService.getLoansList()" [loan]="loan"></app-loan-item>
+  <app-loan-item class="list-group-item justify-content-between" *ngFor="let loan of loanService.getLoansList()"
+                 [loan]="loan"></app-loan-item>
 </div>
-<div *ngIf="loanService.getLoansList() && loanService.getLoansList().length > 0">{{loanService.getTotalAmount() | currency: 'NZD':true:'1.2-2'}}</div>
+
+<div class="text-center">
+  <div *ngIf="loanService.getLoansList() && loanService.getLoansList().length > 0"><strong>Total:</strong> {{loanService.getTotalAmount() |
+    currency: 'USD':true:'1.2-2'}} @ <strong>A.E.R.</strong> of {{ loanService.getWeightedRate() }}%
+  </div>
+</div>

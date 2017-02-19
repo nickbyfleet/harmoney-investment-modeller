@@ -2,18 +2,18 @@
   <div class="form-group">
     <label for="monthly-contribution" class="col-sm-2 control-label">Contribution</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="monthly-contribution" placeholder="Enter a monthly amount...">
+      <input type="number" class="form-control" id="monthly-contribution" placeholder="Enter a monthly amount..." [(ngModel)]="result.monthlyContribution" name="monthly-contribution">
     </div>
   </div>
   <div class="form-group">
     <label for="target-date" class="col-sm-2 control-label">Goal</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="target-date">
+      <input type="date" class="form-control" id="target-date" [(ngModel)]="result.targetDate" name="target-date">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Go!</button>
+      <button type="submit" class="btn btn-default" (click)="submit()">Go!</button>
     </div>
   </div>
 </form>

@@ -1,22 +1,37 @@
 <h3>
   Loans
-  <button class="btn btn-primary" (click)="showLoanInput()" *ngIf="projectService.getCurrentProject()">Add</button>
+  <button class="btn btn-success btn-circle" (click)="showLoanInput()" *ngIf="projectService.getCurrentProject()"><i
+    class="glyphicon glyphicon-plus"></i></button>
 </h3>
 
 <div class="form-inline" *ngIf="showNewLoanInput">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newLoanName"/>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newLoanName"/>
+      </div>
+    </div>
+    <div class="col-xs-4">
+
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="newLoanAmount"/>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Rate" [(ngModel)]="newLoanRate"/>
+          <span class="input-group-btn"><button class="btn btn-primary" type="button"
+                                                (click)="saveNewLoan()">Save</button></span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="input-group">
-    <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="newLoanAmount"/>
-  </div>
-  <div class="input-group">
-    <input type="number" class="form-control" placeholder="Rate" [(ngModel)]="newLoanRate"/>
-  </div>
-  <button class="btn btn-primary" type="button" (click)="saveNewLoan()">Save</button>
 </div>
 
 <br>
 
 <app-loan-list *ngIf="loanService.hasLoans()"></app-loan-list>
-<div class="alert alert-warning" role="alert" *ngIf="!loanService.hasLoans()"><strong>Hello :)</strong> Click above to add a loan to your portfolio.</div>
+<div class="alert alert-warning" role="alert" *ngIf="!loanService.hasLoans()"><strong>Hello :)</strong> Select a
+  scenario and add a loan to your portfolio.
+</div>

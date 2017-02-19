@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ResultService} from "../result.service";
+import {Result} from "../result";
 
 @Component({
   selector: 'app-savings-projection',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SavingsProjectionComponent implements OnInit {
 
-  constructor() { }
+  result: Result;
+
+  constructor(public resultService: ResultService) {
+    this.result = new Result(null, null, null, 'savings_projection');
+  }
 
   ngOnInit() {
+  }
+
+  submit(): void {
+    this.resultService.setResult(this.result);
   }
 
 }
